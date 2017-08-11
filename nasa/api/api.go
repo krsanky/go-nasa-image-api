@@ -101,10 +101,6 @@ func GetSearch(values url.Values) ([]byte, error) {
 	return body, nil
 }
 
-type WrapperOld struct {
-	collection CollectionType
-}
-
 func JsonTest(bs []byte) {
 	var wrapper Wrapper
 	err := json.Unmarshal(bs, &wrapper)
@@ -116,40 +112,4 @@ func JsonTest(bs []byte) {
 	lg.Log.Printf("wrapper.collection.href:%s\n", wrapper.Collection.Href)
 	//lg.Log.Printf("wrapper.collection.items:%v\n", wrapper.Collection.Items)
 	lg.Log.Printf("wrapper.collection.items[0].data[0].media_type:%s\n", wrapper.Collection.Items[0].Data[0].MediaType)
-}
-
-func JsonTest1(bs []byte) {
-	lg.Log.Printf("jsonTest()...")
-	var err error
-
-	var f interface{}
-	err = json.Unmarshal(bs, &f)
-	if err != nil {
-		lg.Log.Printf("err:%s", err.Error())
-	} else {
-		m := f.(map[string]interface{})
-		for k, v := range m {
-			lg.Log.Printf("json k:%s", k)
-			if k == "collection" {
-				lg.Log.Printf("MATCH collection")
-				m2 := v.(map[string]interface{})
-				for k, v := range m2 {
-					lg.Log.Printf("json2 k:%s", k)
-					if k == "version" {
-						lg.Log.Printf("version:%s", v.(string))
-					}
-				}
-			}
-		}
-	}
-
-	var wrapper WrapperOld
-	err = json.Unmarshal(bs, &wrapper)
-	if err != nil {
-		lg.Log.Printf("err:%s", err.Error())
-	} else {
-		lg.Log.Printf("SUCCESS collection.version:%s", wrapper.collection.Version)
-		lg.Log.Printf("wrapper:%+v", wrapper)
-	}
-
 }
