@@ -101,6 +101,21 @@ func GetSearch(values url.Values) ([]byte, error) {
 	return body, nil
 }
 
+func GetDetail(nasa_id string) ([]byte, error) {
+	var err error
+	url_ := fmt.Sprintf("%s/asset/%s", base_url, nasa_id)
+	res, err := http.Get(url_)
+	if err != nil {
+		return []byte{}, err
+	}
+	body, err := ioutil.ReadAll(res.Body)
+	res.Body.Close()
+	if err != nil {
+		return []byte{}, err
+	}
+	return body, err
+}
+
 func JsonTest(bs []byte) {
 	var wrapper Wrapper
 	err := json.Unmarshal(bs, &wrapper)
