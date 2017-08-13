@@ -40,13 +40,14 @@ type Link struct {
 }
 
 type DataType struct {
-	MediaType   string `json:"media_type"`
-	NasaId      string `json:"nasa_id"`
-	Description string `json:"description"`
-	Location    string `json:"location"`
-	Title       string `json:"title"`
-	Center      string `json:"center"`
-	DateCreated string `json:"date_created"`
+	MediaType   string   `json:"media_type"`
+	NasaId      string   `json:"nasa_id"`
+	Description string   `json:"description"`
+	Location    string   `json:"location"`
+	Title       string   `json:"title"`
+	Center      string   `json:"center"`
+	DateCreated string   `json:"date_created"`
+	Keywords    []string `json:"keywords"`
 }
 
 func getJson() []byte {
